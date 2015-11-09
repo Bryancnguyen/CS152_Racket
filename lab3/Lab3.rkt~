@@ -1,0 +1,10 @@
+#lang racket
+
+
+(define (strings-to-nums lst)
+         (cond [(empty? lst) '()]
+               [else
+              (map (λ(x) (+ x 1)) lst)]))
+
+
+(strings-to-nums '("1" "2"))                

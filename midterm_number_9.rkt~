@@ -1,0 +1,10 @@
+#lang racket
+
+(define (mult-all lst)
+	(mult-all-helper lst 1))
+(define (mult-all-helper lst acc) 
+	(cond [(empty? lst) acc]
+		[else (mult-all-helper (cdr lst)
+			(* acc (car lst)))]))
+
+(mult-all '(2 3 5))

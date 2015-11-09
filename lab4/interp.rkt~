@@ -1,0 +1,21 @@
+#lang racket
+
+;; Expressions in the language
+(struct b-val (val))
+(struct b-if (c thn els))
+
+;; Main evaluate method
+(define (evaluate prog)
+  (match prog
+    [(struct b-val (v)) v]
+    [(struct b-if (c thn els))
+     (if (evaluate c)
+         (evaluate thn)
+         (evaluate els))]
+    [_ (error "Unrecognized expression")]))
+
+(evaluate (b-val #t))
+(evaluate (b-val #f))
+(evaluate (b-if (b-val #t)
+                (b-if (b-val #f) (b-val #t) (b-val #f))
+                (b-val #f)))
